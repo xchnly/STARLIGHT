@@ -34,11 +34,6 @@
                 </MenuItem>
                 <MenuItem v-slot="{ active }">
                   <a href="#" :class="[active ? 'bg-gray-50' : '', 'block px-3 py-1 text-sm leading-6 text-gray-900']"
-                    >Move<span class="sr-only">, {{ project.name }}</span></a
-                  >
-                </MenuItem>
-                <MenuItem v-slot="{ active }">
-                  <a href="#" :class="[active ? 'bg-gray-50' : '', 'block px-3 py-1 text-sm leading-6 text-gray-900']"
                     >Delete<span class="sr-only">, {{ project.name }}</span></a
                   >
                 </MenuItem>

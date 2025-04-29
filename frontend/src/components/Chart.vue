@@ -47,14 +47,15 @@ onMounted(() => {
     plotOptions: {
       bar: {
         horizontal: false,
-        columnWidth: '70%',
-        borderRadius: 4, // Sedikit rounded corners
+        columnWidth: '60%',
+        borderRadius: 5, // Sedikit rounded corners
+        borderRadiusApplication: 'end',
         dataLabels: {
           position: 'top' // Label di atas column
         }
       }
     },
-    colors: ['#3B82F6', '#10B981', '#F59E0B'], // Blue, Emerald, Amber
+    colors: ['#004aad', '#5de0e6', '#FFD700'], // Blue, Emerald, Amber
     dataLabels: {
       enabled: true,
       formatter: function(val) {
@@ -62,7 +63,7 @@ onMounted(() => {
       },
       offsetY: -25, // Posisi label
       style: {
-        fontSize: '12px',
+        fontSize: '10px',
         colors: ['#111827'] // Text gray-900
       }
     },

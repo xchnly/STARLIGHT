@@ -306,7 +306,6 @@ const teams = [
     { id: 2, name: 'Regita Anastasya Putri蔡季玲', href: '#', initial: 'R', current: false }
 ]
 
-
 const userNavigation = [
     { name: 'Your profile', href: '#' },
     { name: 'Sign out', href: '#' },
