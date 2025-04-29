@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 # STARLIGHT
-=======
 # ✨ STARLIGHT
 
 STARLIGHT adalah sebuah proyek Manajemen print label di PT CHAMPION MATTRESS. Dirancang untuk memberikan keefektivan dan ketepatan dalam pengerjaan, dengan tampilan elegan dan performa handal.
