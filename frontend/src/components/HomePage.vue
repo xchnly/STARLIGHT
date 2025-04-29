@@ -53,44 +53,53 @@
                                         alt="Your Company" />
                                 </div>
                                 <nav class="flex flex-1 flex-col">
-                                    <ul role="list" class="flex flex-1 flex-col gap-y-7">
-                                        <li>
-                                            <ul role="list" class="-mx-2 space-y-1">
-                                                <li v-for="item in navigation" :key="item.name">
-                                                    <a :href="item.href"
-                                                        :class="[item.current ? 'bg-gray-50 text-warna2' : 'text-gray-700 hover:bg-gray-50 hover:text-warna2', 'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6']">
-                                                        <component :is="item.icon"
-                                                            :class="[item.current ? 'text-warna2' : 'text-gray-400 group-hover:text-warna2', 'h-6 w-6 shrink-0']"
-                                                            aria-hidden="true" />
-                                                        {{ item.name }}
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <div class="text-xs font-semibold leading-6 text-gray-400">Your teams</div>
-                                            <ul role="list" class="-mx-2 mt-2 space-y-1">
-                                                <li v-for="team in teams" :key="team.name">
-                                                    <a :href="team.href"
-                                                        :class="[team.current ? 'bg-gray-50 text-warna2' : 'text-gray-700 hover:bg-gray-50 hover:text-warna2', 'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6']">
-                                                        <span
-                                                            :class="[team.current ? 'border-warna2 text-warna2' : 'border-gray-200 text-gray-400 group-hover:border-warna2 group-hover:text-warna2', 'flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border bg-white text-[0.625rem] font-medium']">{{
-                                                            team.initial }}</span>
-                                                        <span class="truncate">{{ team.name }}</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="mt-auto">
-                                            <a href="#"
-                                                class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-warna2">
-                                                <Cog6ToothIcon
-                                                    class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-warna2"
-                                                    aria-hidden="true" />
-                                                Settings
-                                            </a>
-                                        </li>
-                                    </ul>
+                                <ul role="list" class="flex flex-1 flex-col gap-y-7">
+                                    <li>
+                                        <ul role="list" class="-mx-2 space-y-1">
+                                            <li v-for="item in navigation" :key="item.name">
+                                                <router-link :to="item.to" @click="sidebarOpen = false" :class="[
+                                                    item.current ? 'bg-gray-50 text-warna2' : 'text-gray-700 hover:bg-gray-50 hover:text-warna2',
+                                                    'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6'
+                                                ]">
+                                                    <component :is="item.icon" :class="[
+                                                        item.current ? 'text-warna2' : 'text-gray-400 group-hover:text-warna2',
+                                                        'h-6 w-6 shrink-0'
+                                                    ]" aria-hidden="true" />
+                                                    {{ item.name }}
+                                                </router-link>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <!-- Teams section -->
+                                    <li>
+                                        <div class="text-xs font-semibold leading-6 text-gray-400">Your teams</div>
+                                        <ul role="list" class="-mx-2 mt-2 space-y-1">
+                                            <li v-for="team in teams" :key="team.name">
+                                                <a href="#" @click.prevent="activateTeam(team)" :class="[
+                                                    team.current ? 'bg-gray-50 text-warna2' : 'text-gray-700 hover:bg-gray-50 hover:text-warna2',
+                                                    'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 cursor-pointer'
+                                                ]">
+                                                    <span :class="[
+                                                        team.current ? 'border-warna2 text-warna2' : 'border-gray-200 text-gray-400 group-hover:border-warna2 group-hover:text-warna2',
+                                                        'flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border bg-white text-[0.625rem] font-medium'
+                                                    ]">
+                                                        {{ team.initial }}
+                                                    </span>
+                                                    <span class="truncate">{{ team.name }}</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="mt-auto">
+                                        <router-link to="/settings" @click="sidebarOpen = false"
+                                            class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-warna2">
+                                            <Cog6ToothIcon
+                                                class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-warna2"
+                                                aria-hidden="true" />
+                                            Settings
+                                        </router-link>
+                                    </li>
+                                </ul>
                                 </nav>
                             </div>
                         </DialogPanel>
@@ -111,37 +120,47 @@
                         <li>
                             <ul role="list" class="-mx-2 space-y-1">
                                 <li v-for="item in navigation" :key="item.name">
-                                    <a :href="item.href"
-                                        :class="[item.current ? 'bg-gray-50 text-warna2' : 'text-gray-700 hover:bg-gray-50 hover:text-warna2', 'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6']">
-                                        <component :is="item.icon"
-                                            :class="[item.current ? 'text-warna2' : 'text-gray-400 group-hover:text-warna2', 'h-6 w-6 shrink-0']"
-                                            aria-hidden="true" />
+                                    <router-link :to="item.to" :class="[
+                                        item.current ? 'bg-gray-50 text-warna2' : 'text-gray-700 hover:bg-gray-50 hover:text-warna2',
+                                        'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6'
+                                    ]">
+                                        <component :is="item.icon" :class="[
+                                            item.current ? 'text-warna2' : 'text-gray-400 group-hover:text-warna2',
+                                            'h-6 w-6 shrink-0'
+                                        ]" aria-hidden="true" />
                                         {{ item.name }}
-                                    </a>
+                                    </router-link>
                                 </li>
                             </ul>
                         </li>
+
                         <li>
                             <div class="text-xs font-semibold leading-6 text-gray-400">Your teams</div>
                             <ul role="list" class="-mx-2 mt-2 space-y-1">
                                 <li v-for="team in teams" :key="team.name">
-                                    <a :href="team.href"
-                                        :class="[team.current ? 'bg-gray-50 text-warna2' : 'text-gray-700 hover:bg-gray-50 hover:text-warna2', 'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6']">
-                                        <span
-                                            :class="[team.current ? 'border-warna2 text-warna2' : 'border-gray-200 text-gray-400 group-hover:border-warna2 group-hover:text-warna2', 'flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border bg-white text-[0.625rem] font-medium']">{{
-                                            team.initial }}</span>
+                                    <a href="#" @click.prevent="activateTeam(team)" :class="[
+                                        team.current ? 'bg-gray-50 text-warna2' : 'text-gray-700 hover:bg-gray-50 hover:text-warna2',
+                                        'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 cursor-pointer'
+                                    ]">
+                                        <span :class="[
+                                            team.current ? 'border-warna2 text-warna2' : 'border-gray-200 text-gray-400 group-hover:border-warna2 group-hover:text-warna2',
+                                            'flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border bg-white text-[0.625rem] font-medium'
+                                        ]">
+                                            {{ team.initial }}
+                                        </span>
                                         <span class="truncate">{{ team.name }}</span>
                                     </a>
                                 </li>
                             </ul>
                         </li>
+
                         <li class="mt-auto">
-                            <a href="#"
+                            <router-link to="/settings"
                                 class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-warna2">
                                 <Cog6ToothIcon class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-warna2"
                                     aria-hidden="true" />
                                 Settings
-                            </a>
+                            </router-link>
                         </li>
                     </ul>
                 </nav>
@@ -187,7 +206,7 @@
                                     alt="" />
                                 <span class="hidden lg:flex lg:items-center">
                                     <span class="ml-4 text-sm font-semibold leading-6 text-gray-900"
-                                        aria-hidden="true">Tom Cook</span>
+                                        aria-hidden="true">Hendry黄</span>
                                     <ChevronDownIcon class="ml-2 h-5 w-5 text-gray-400" aria-hidden="true" />
                                 </span>
                             </MenuButton>
@@ -202,7 +221,7 @@
                                     <MenuItem v-for="item in userNavigation" :key="item.name" v-slot="{ active }">
                                     <a :href="item.href"
                                         :class="[active ? 'bg-gray-50' : '', 'block px-3 py-1 text-sm leading-6 text-gray-900']">{{
-                                        item.name }}</a>
+                                            item.name }}</a>
                                     </MenuItem>
                                 </MenuItems>
                             </transition>
@@ -211,21 +230,16 @@
                 </div>
             </div>
 
-            <main class="py-10">
-                <div class="px-4 sm:px-6 lg:px-8">
-                    <router-view />
-                </div>
+            <main class="p-10 flex-1">
+                <router-view></router-view>
             </main>
         </div>
     </div>
 </template>
 
 <script setup>
-import TabelList from './Tabel.vue'
-import Calender from './Calender.vue'
-import ListProject from './ProjectPage.vue'
-
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import {
     Dialog,
     DialogPanel,
@@ -233,7 +247,6 @@ import {
     MenuButton,
     MenuItem,
     MenuItems,
-    Tab,
     TransitionChild,
     TransitionRoot,
 } from '@headlessui/vue'
@@ -251,23 +264,51 @@ import {
 } from '@heroicons/vue/24/outline'
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 
-const navigation = [
-    { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-    { name: 'Team', href: '#', icon: UsersIcon, current: false },
-    { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-    { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-    // { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
-    { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
-]
+const router = useRouter()
+const route = useRoute()
+const sidebarOpen = ref(false)
+
+const navigation = computed(() => [
+    {
+        name: 'Dashboard',
+        to: { name: 'Dashboard' },
+        icon: HomeIcon,
+        current: route.name === 'Dashboard'
+    },
+    {
+        name: 'Team',
+        to: { name: 'Team' },
+        icon: UsersIcon,
+        current: route.name === 'Team'
+    },
+    {
+        name: 'Projects',
+        to: { name: 'Projects' },
+        icon: FolderIcon,
+        current: route.name === 'Projects'
+    },
+    {
+        name: 'Calendar',
+        to: { name: 'Calendar' },
+        icon: CalendarIcon,
+        current: route.name === 'Calendar'
+    },
+    {
+        name: 'Reports',
+        to: { name: 'Reports' },
+        icon: ChartPieIcon,
+        current: route.name === 'Reports'
+    }
+])
+
 const teams = [
     { id: 1, name: 'Hendry黄恒利', href: '#', initial: 'H', current: false },
-    { id: 2, name: 'Regita Anastasya Putri蔡季玲', href: '#', initial: 'R', current: false },
-    // { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false },
+    { id: 2, name: 'Regita Anastasya Putri蔡季玲', href: '#', initial: 'R', current: false }
 ]
+
+
 const userNavigation = [
     { name: 'Your profile', href: '#' },
     { name: 'Sign out', href: '#' },
 ]
-
-const sidebarOpen = ref(false)
 </script>
